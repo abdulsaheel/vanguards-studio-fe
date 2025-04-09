@@ -1,0 +1,196 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 20% 97%;
+    --foreground: 20 10% 16%;
+    --accent-1: 24 12% 84%;
+    --accent-2: 24 15% 66%;
+    --accent-highlight: 25 35% 37%;
+  }
+
+  ::selection {
+    @apply bg-accent-highlight text-background;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased cursor-default;
+    font-family: 'Satoshi', sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Italiana', serif;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative text-lg tracking-wide hover:text-accent-highlight transition-colors;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute left-0 -bottom-1 w-0 h-px bg-accent-highlight transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .btn {
+    @apply px-6 py-3 rounded-full transition-all duration-300 text-sm tracking-wider uppercase relative overflow-hidden;
+  }
+
+  .btn::before {
+    content: '';
+    @apply absolute inset-0 w-full h-full scale-x-0 origin-left transition-transform duration-300;
+  }
+
+  .btn:hover::before {
+    @apply scale-x-100;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent-highlight text-white hover:bg-opacity-90;
+  }
+
+  .btn-primary::before {
+    @apply bg-foreground;
+  }
+
+  .btn-outline {
+    @apply btn border border-accent-highlight text-accent-highlight hover:text-white;
+  }
+
+  .btn-outline::before {
+    @apply bg-accent-highlight;
+  }
+
+  .section {
+    @apply py-24 px-6 md:px-12 lg:px-24 relative;
+  }
+
+  .container-xl {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .magnetic-button {
+    @apply transition-transform duration-100 ease-out;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-highlight to-foreground;
+  }
+
+  .hover-trigger .hover-target {
+    @apply opacity-0 translate-y-4 transition-all duration-300;
+  }
+
+  .hover-trigger:hover .hover-target {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .parallax-section {
+    @apply will-change-transform;
+    transform-style: preserve-3d;
+  }
+
+  .cursor-glow {
+    @apply pointer-events-none fixed w-64 h-64 rounded-full;
+    background: radial-gradient(circle, rgba(var(--accent-highlight), 0.15) 0%, transparent 70%);
+    mix-blend-mode: multiply;
+  }
+
+  .magnetic-area {
+    @apply relative overflow-hidden;
+  }
+
+  .magnetic-area::after {
+    content: '';
+    @apply absolute inset-0 bg-accent-highlight/5 opacity-0 transition-opacity duration-300;
+  }
+
+  .magnetic-area:hover::after {
+    @apply opacity-100;
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 1px hsl(var(--foreground));
+    @apply text-transparent;
+  }
+
+  .scroll-indicator {
+    @apply fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-50;
+  }
+
+  .scroll-indicator-dot {
+    @apply w-2 h-2 rounded-full bg-accent-2 transition-all duration-300;
+  }
+
+  .scroll-indicator-dot.active {
+    @apply bg-accent-highlight h-8;
+  }
+
+  .split-text-animation {
+    @apply overflow-hidden relative;
+  }
+
+  .split-text-animation span {
+    @apply block transition-transform duration-500;
+  }
+
+  .split-text-animation:hover span {
+    @apply -translate-y-full;
+  }
+
+  .split-text-animation span + span {
+    @apply absolute top-0 left-0 translate-y-full;
+  }
+
+  .split-text-animation:hover span + span {
+    @apply translate-y-0;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes grain {
+    0%, 100% { transform: translate(0, 0) }
+    10% { transform: translate(-5%, -5%) }
+    20% { transform: translate(-10%, 5%) }
+    30% { transform: translate(5%, -10%) }
+    40% { transform: translate(-5%, 15%) }
+    50% { transform: translate(-10%, 5%) }
+    60% { transform: translate(15%, 0) }
+    70% { transform: translate(0, 10%) }
+    80% { transform: translate(-15%, 0) }
+    90% { transform: translate(10%, 5%) }
+  }
+
+  .grain {
+    @apply pointer-events-none fixed inset-0 z-50 opacity-[0.12];
+    background-image: url('data:image/png;base64,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');
+    animation: grain 8s steps(10) infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
